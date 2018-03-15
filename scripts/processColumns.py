@@ -100,9 +100,9 @@ def process_importance(value):
         return 5
 
 def process_ptp(value):
-    if value == 'Yes':
-        return 1
-    return 2
+    if value == 'No':
+        return 0
+    return 1
 
 def process_flex(value):
     # print value
