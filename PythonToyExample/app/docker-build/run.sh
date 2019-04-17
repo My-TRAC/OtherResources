@@ -12,4 +12,4 @@ chmod -R +x /opt/ConfigurationScripts/*.sh
 /opt/ConfigurationScripts/setJDBCConnector.sh cigo-jdbc-source_PythonTest mytrac ratings
 
 
-python3 /opt/src/printDate.py
+python3 /opt/src/pythonTest.py
