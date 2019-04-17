@@ -18,7 +18,6 @@ services:
             SCHEMA_REGISTRY_HOST_NAME: schema-registry
             MYSQL_HOST: mysql_python
             MYSQL_PASSWORD: confluent
-            ELASTIC_TOPICS: "cigo-jdbc-activities_summary, ratings"
             SINK_TOPICS: "ratings"
 networks:
     default:
