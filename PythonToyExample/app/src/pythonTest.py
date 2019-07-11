@@ -25,7 +25,6 @@ def notExistTable(cursor,table):
 notAvailable=True
 while notAvailable:
     try:
-        #cnx = mysql.connector.connect(user='confluent', password='confluent', host='192.168.99.100', database='connect_test')
         cnx = mysql.connector.connect(user='confluent', password='confluent', host='mysql_python', database='connect_test')
         notAvailable=False
     except:
@@ -46,7 +45,8 @@ cursor = cnx.cursor()
 #Define table structure
 table_name = 'employees'
 table_description = ("CREATE TABLE `employees` ("
-    "  `id` int(11) NOT NULL AUTO_INCREMENT,"
+    "  `id` bigint NOT NULL AUTO_INCREMENT,"
+    "  `timestamp` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),"
     "  `birth_date` date NOT NULL,"
     "  `first_name` varchar(14) NOT NULL,"
     "  `last_name` varchar(16) NOT NULL,"

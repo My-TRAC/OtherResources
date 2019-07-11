@@ -14,7 +14,6 @@ COPY run.sh /opt
 RUN chmod -R +x /opt/run.sh
 
 COPY src /opt/src
-COPY scripts /opt/scripts
 RUN chmod -R +x /opt/src
 
 

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql_python
+  name: mysqlpython
   labels:
-    app: mysql_python
+    app: mysqlpython
 spec:
   #type: LoadBalancer 
   ports:
@@ -12,7 +12,7 @@ spec:
     targetPort: 3306 
   clusterIP: None
   selector:
-    app: mysql_python 
+    app: mysqlpython 
 status:
   loadBalancer: {}
 ---
@@ -20,15 +20,15 @@ apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   labels:
-    app: mysql_python
-  name: mysql_python
+    app: mysqlpython
+  name: mysqlpython
 spec:
-  serviceName: mysql_python
+  serviceName: mysqlpython
   replicas: 1
   template:
     metadata:
       labels:
-        app: mysql_python
+        app: mysqlpython
     spec:
       containers:
       - env:
@@ -41,7 +41,9 @@ spec:
         - name: MYSQL_DATABASE
           value: connect_test
         image: mysql:5.5.59
-        name: mysql_python 
+        args:
+            - "--ignore-db-dir=lost+found"
+        name: mysqlpython 
         ports:
         - containerPort: 3306
         volumeMounts:

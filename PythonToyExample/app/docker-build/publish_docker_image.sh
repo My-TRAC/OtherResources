@@ -2,11 +2,8 @@
 
 
 
-if [[ "$OSTYPE" == *"darwin"* ]]
-then
-eval $(docker-machine env cigo)
-fi
 
 cp -r ../src .
-docker build -t python_test . 
+docker build -t sparsitytechnologies/python-test:latest . 
+docker push sparsitytechnologies/python-test:latest
 rm -r src
