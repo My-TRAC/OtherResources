@@ -4,6 +4,6 @@
 
 
 cp -r ../src .
-docker build -t sparsitytechnologies/python-test:latest . 
-docker push sparsitytechnologies/python-test:latest
+docker build -t mytrac/python-test:latest . 
+docker push mytrac/python-test:latest
 rm -r src

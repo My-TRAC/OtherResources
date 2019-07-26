@@ -1,3 +1,4 @@
+import os
 import time 
 import datetime
 from datetime import date, datetime, timedelta
@@ -25,7 +26,11 @@ def notExistTable(cursor,table):
 notAvailable=True
 while notAvailable:
     try:
-        cnx = mysql.connector.connect(user='confluent', password='confluent', host='mysql_python', database='connect_test')
+        USER = os.getenv('MYSQL_USER', 'user')
+        PW = os.getenv('MYSQL_PASSWORD', 'confluent')
+        HOST = os.getenv('MYSQL_HOST','mysql-python')
+        DB = os.getenv('MYSQL_DATABASE','connect_test')
+        cnx = mysql.connector.connect(user=USER, password=PW, host=HOST, database=DB)
         notAvailable=False
     except:
         print("Mysql connection not available");
@@ -45,14 +50,14 @@ cursor = cnx.cursor()
 #Define table structure
 table_name = 'employees'
 table_description = ("CREATE TABLE `employees` ("
-    "  `id` bigint NOT NULL AUTO_INCREMENT,"
-    "  `timestamp` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),"
+    "  `mytrac_id` bigint NOT NULL AUTO_INCREMENT,"
+    "  `mytrac_last_modified` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),"
     "  `birth_date` date NOT NULL,"
     "  `first_name` varchar(14) NOT NULL,"
     "  `last_name` varchar(16) NOT NULL,"
     "  `gender` enum('M','F') NOT NULL,"
     "  `hire_date` date NOT NULL,"
-    "  PRIMARY KEY (`id`)"
+    "  PRIMARY KEY (`mytrac_id`)"
     ") ENGINE=InnoDB")
 
 

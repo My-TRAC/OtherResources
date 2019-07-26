@@ -30,16 +30,22 @@ spec:
       containers:
       - env:
         - name: KAFKA_CONNECT_HOST
-          value: kafka-connect
-        - name: MYSQL_HOST
-          value: mysql-python
-        - name: MYSQL_PASSWORD
-          value: confluent
+          value: cigo-kafka-connect
         - name: SCHEMA_REGISTRY_HOST_NAME
-          value: schema-registry
+          value: cigo-schema-registry
         - name: SINK_TOPICS
           value: ratings
-        image: sparsitytechnologies/python-test:latest
+        - name: SOURCE_TOPICS
+          value: employees
+        - name: MYSQL_HOST
+          value: mysqlpython
+        - name: MYSQL_DATABASE
+          value: connect_test
+        - name: MYSQL_USER
+          value: confluent
+        - name: MYSQL_PASSWORD
+          value: confluent
+        image: mytrac/python-test:latest
         imagePullPolicy: Always
         name: python-test
         resources: {}

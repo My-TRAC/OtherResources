@@ -1,7 +1,8 @@
 FROM python:3
 
 
-RUN apt-get update && apt-get install -y mysql-client
+#RUN apt-get update &&apt-get upgrade && apt-get install -y mysql-client
+RUN apt-get update && apt-get install -y mariadb-client
 
 
 #INSTALL REQUIRED LIBRARIES

@@ -1,18 +1,18 @@
 version: "3"
 services:
-    mysql_python:
+    mysql-python:
         image: mysql:5.7
-        container_name: mysql_python
+        container_name: mysql-python
         environment:
             MYSQL_ROOT_PASSWORD: confluent
             MYSQL_USER: confluent
             MYSQL_PASSWORD: confluent
             MYSQL_DATABASE: connect_test
     python_test:
-        image: python_test:latest
-        container_name: python_test
+        image: mytrac/python-test:latest
+        container_name: python-test
         depends_on:
-            - mysql_python
+            - mysql-python
         environment:
             KAFKA_CONNECT_HOST: kafka-connect
             SCHEMA_REGISTRY_HOST_NAME: schema-registry
@@ -20,7 +20,8 @@ services:
             MYSQL_DATABASE: connect_test
             MYSQL_USER: confluent
             MYSQL_PASSWORD: confluent
-            #            SINK_TOPICS: "ratings"
+            SINK_TOPICS: "ratings"
+            SOURCE_TOPICS: "employees"
 networks:
     default:
         external:
