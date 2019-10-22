@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: acess_all
+  name: access_all
   labels:
-    app: acess_all
+    app: access_all
 spec:
   type: NodePort 
   ports: 
   - name: "24568" 
     port: 24568
   selector:
-    app: acess_all
+    app: access_all
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-   app: acess_all
-  name: acess_all
+   app: access_all
+  name: access_all
 spec:
   replicas: 1
   strategy:
@@ -25,7 +25,7 @@ spec:
   template:
     metadata:
       labels:
-        app: acess_all
+        app: access_all
     spec:
       containers:
       - env:
@@ -43,9 +43,9 @@ spec:
           value: confluent
         - name: MYSQL_PASSWORD
           value: confluent
-        image: mytrac/acess_all:latest
+        image: mytrac/access_all:latest
         imagePullPolicy: Always
-        name: acess_all
+        name: access_all
         resources: {}
       restartPolicy: Always
 status: {}
