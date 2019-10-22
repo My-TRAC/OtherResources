@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: acess_all
+  labels:
+    app: acess_all
+spec:
+  type: NodePort 
+  ports: 
+  - name: "24568" 
+    port: 24568
+  selector:
+    app: acess_all
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+   app: acess_all
+  name: acess_all
+spec:
+  replicas: 1
+  strategy:
+      type: Recreate
+  template:
+    metadata:
+      labels:
+        app: acess_all
+    spec:
+      containers:
+      - env:
+        - name: KAFKA_CONNECT_HOST
+          value: cigo-kafka-connect
+        - name: SCHEMA_REGISTRY_HOST_NAME
+          value: cigo-schema-registry
+        - name: SINK_TOPICS
+          value: "ratings, activity, agency, calendar_date"
+        - name: MYSQL_HOST
+          value: mysqlpython
+        - name: MYSQL_DATABASE
+          value: connect_test
+        - name: MYSQL_USER
+          value: confluent
+        - name: MYSQL_PASSWORD
+          value: confluent
+        image: mytrac/acess_all:latest
+        imagePullPolicy: Always
+        name: acess_all
+        resources: {}
+      restartPolicy: Always
+status: {}

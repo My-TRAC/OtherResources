@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqlpython
+  labels:
+    app: mysqlpython
+spec:
+  ports:
+  - name: "server"
+    port: 3306
+    targetPort: 6666 
+  clusterIP: None
+  selector:
+    app: mysqlpython 
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mysqlpython
+  name: mysqlpython
+spec:
+  serviceName: mysqlpython
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysqlpython
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: confluent
+        - name: MYSQL_USER
+          value: confluent
+        - name: MYSQL_PASSWORD
+          value: confluent
+        - name: MYSQL_DATABASE
+          value: connect_test
+        image: mysql:5.7
+        args:
+            - "--ignore-db-dir=lost+found"
+        name: mysqlpython 
+        ports:
+        - containerPort: 6666
+        volumeMounts:
+          - name: data 
+            mountPath: /var/lib/mysql
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: "standard"
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi

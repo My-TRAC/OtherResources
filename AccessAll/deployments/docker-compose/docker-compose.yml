@@ -1,0 +1,27 @@
+version: "3"
+services:
+    mysql-python:
+        image: mysql:5.7
+        container_name: mysql-python
+        environment:
+            MYSQL_ROOT_PASSWORD: confluent
+            MYSQL_USER: confluent
+            MYSQL_PASSWORD: confluent
+            MYSQL_DATABASE: connect_test
+    access_all:
+        image: mytrac/access_all:latest
+        container_name: access_all
+        depends_on:
+            - mysql-python
+        environment:
+            KAFKA_CONNECT_HOST: kafka-connect
+            SCHEMA_REGISTRY_HOST_NAME: schema-registry
+            MYSQL_HOST: mysql-python
+            MYSQL_DATABASE: connect_test
+            MYSQL_USER: confluent
+            MYSQL_PASSWORD: confluent
+            SINK_TOPICS: "ratings, activity, agency, calendar_date, cagarreter"
+networks:
+    default:
+        external:
+            name: cigo-compose_default
