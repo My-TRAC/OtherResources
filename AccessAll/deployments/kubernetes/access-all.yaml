@@ -34,7 +34,7 @@ spec:
         - name: SCHEMA_REGISTRY_HOST_NAME
           value: cigo-schema-registry
         - name: SINK_TOPICS
-          value: "ratings, activity, agency, calendar_date"
+          value: "activity, mobility_trace, facility, poi, user, user_chooses_route, user_evaluates_activity, user_joins_group, user_uses_app, user_views_activity, user_reward"
         - name: MYSQL_HOST
           value: mysqlpython
         - name: MYSQL_DATABASE

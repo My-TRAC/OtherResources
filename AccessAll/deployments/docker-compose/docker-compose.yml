@@ -20,7 +20,7 @@ services:
             MYSQL_DATABASE: connect_test
             MYSQL_USER: confluent
             MYSQL_PASSWORD: confluent
-            SINK_TOPICS: "ratings, activity, agency, calendar_date, cagarreter"
+            SINK_TOPICS: "activity, mobility_trace, facility, poi, user, user_chooses_route, user_evaluates_activity, user_joins_group, user_uses_app, user_views_activity, user_reward"
 networks:
     default:
         external:
